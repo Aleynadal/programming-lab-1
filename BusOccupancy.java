@@ -14,7 +14,7 @@ public class BusOccupancy {
 
         Scanner input = new Scanner(System.in);
 
-        // ===== 1. ENTER DATA =====
+        
         System.out.print("How many stops are on the route? ");
         int stopCount = Integer.parseInt(input.nextLine().trim());
 
@@ -37,14 +37,14 @@ public class BusOccupancy {
             alighting[i] = Integer.parseInt(input.nextLine().trim());
         }
 
-        // ===== 2. OCCUPANCY CALCULATION + 3. CAPACITY CHECK =====
+        
         int[] occupancy = new int[stopCount];
-        int currentPassengers = 0;      // start from an empty bus
+        int currentPassengers = 0;      
         int overCapacityCount = 0;
 
         System.out.println("\n===== OCCUPANCY REPORT =====");
         for (int i = 0; i < stopCount; i++) {
-            // Alighting more than currently on the bus -> data entry error
+            
             if (alighting[i] > currentPassengers + boarding[i]) {
                 System.out.println("Data entry error at " + stopNames[i]
                         + ": cannot have more passengers alighting than are currently on the bus. Occupancy set to 0.");
@@ -56,7 +56,7 @@ public class BusOccupancy {
             occupancy[i] = currentPassengers;
             System.out.println("Passengers on the bus after " + stopNames[i] + ": " + currentPassengers);
 
-            // Capacity check
+            
             if (currentPassengers > capacity) {
                 System.out.println("Warning: Bus is over capacity at " + stopNames[i] + "!");
                 overCapacityCount++;
@@ -64,7 +64,7 @@ public class BusOccupancy {
         }
         System.out.println("Number of stops the bus was over capacity: " + overCapacityCount);
 
-        // ===== 4. DISPLAY ALL =====
+        
         System.out.println("\n===== ALL STOPS =====");
         System.out.printf("%-20s %-12s %-12s %-10s%n",
                 "Stop Name", "Boarding", "Alighting", "Occupancy");
@@ -74,7 +74,7 @@ public class BusOccupancy {
                     stopNames[i], boarding[i], alighting[i], occupancy[i]);
         }
 
-        // ===== 5. STATISTICS =====
+        
         System.out.println("\n===== STATISTICS =====");
 
         // Busiest stop (highest number of passengers boarding)
@@ -87,7 +87,7 @@ public class BusOccupancy {
         System.out.println("Busiest stop: " + stopNames[busiestIndex]
                 + " (" + boarding[busiestIndex] + " passengers boarding)");
 
-        // Average occupancy across all stops
+        
         int total = 0;
         for (int i = 0; i < stopCount; i++) {
             total += occupancy[i];
@@ -95,10 +95,10 @@ public class BusOccupancy {
         double average = (double) total / stopCount;
         System.out.printf("Average occupancy across all stops: %.2f%n", average);
 
-        // Stops that exceeded capacity
+        
         System.out.println("Stops that exceeded the bus capacity: " + overCapacityCount);
 
-        // Final occupancy check
+        
         int finalOccupancy = occupancy[stopCount - 1];
         if (finalOccupancy != 0) {
             System.out.println("Warning: " + finalOccupancy
