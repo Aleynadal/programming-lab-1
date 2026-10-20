@@ -14,9 +14,7 @@ public class Tournament {
 
         Scanner input = new Scanner(System.in);
 
-        // ===== FIXED FIXTURE (4 teams, 6 matches) =====
-        // NOT: Föydeki fikstür fotoğrafta görünmüyor. Fikstürünüz farklıysa
-        // sadece aşağıdaki iki diziyi değiştirmeniz yeterli.
+
         String[] teams = {"Team A", "Team B", "Team C", "Team D"};
         int[] homeTeam = {0, 2, 0, 1, 0, 1};   // her maçın 1. takımının indeksi
         int[] awayTeam = {1, 3, 2, 3, 3, 2};   // her maçın 2. takımının indeksi
@@ -24,7 +22,7 @@ public class Tournament {
         int matchCount = homeTeam.length;
         int teamCount = teams.length;
 
-        // Takım istatistikleri
+        
         int[] played = new int[teamCount];
         int[] wins = new int[teamCount];
         int[] draws = new int[teamCount];
@@ -34,7 +32,7 @@ public class Tournament {
         int[] goalsAgainst = new int[teamCount];
         int[] goalDiff = new int[teamCount];
 
-        // ===== 1. FIXTURE & SCORE INPUT =====
+        
         System.out.println("===== TOURNAMENT FIXTURE =====");
         for (int i = 0; i < matchCount; i++) {
             System.out.println("Match " + (i + 1) + ": "
@@ -59,7 +57,7 @@ public class Tournament {
                     + awayGoals[i] + " " + teams[awayTeam[i]]);
         }
 
-        // ===== 2. POINTS CALCULATION + 3. GOAL DIFFERENCE CALCULATION =====
+        
         for (int i = 0; i < matchCount; i++) {
             int h = homeTeam[i];
             int a = awayTeam[i];
@@ -67,14 +65,14 @@ public class Tournament {
             played[h]++;
             played[a]++;
 
-            // Goals for / against
+            
             goalsFor[h] += homeGoals[i];
             goalsAgainst[h] += awayGoals[i];
             goalsFor[a] += awayGoals[i];
             goalsAgainst[a] += homeGoals[i];
 
-            // Result
-            if (homeGoals[i] == awayGoals[i]) {          // draw
+            
+            if (homeGoals[i] == awayGoals[i]) {          
                 points[h] += 1;
                 points[a] += 1;
                 draws[h]++;
@@ -94,7 +92,7 @@ public class Tournament {
             goalDiff[t] = goalsFor[t] - goalsAgainst[t];
         }
 
-        // ===== 4. STANDINGS TABLE =====
+        
         System.out.println("\n===== STANDINGS TABLE =====");
         System.out.printf("%-10s %3s %3s %3s %3s %5s %5s%n",
                 "Team", "P", "W", "D", "L", "Pts", "GD");
@@ -106,7 +104,7 @@ public class Tournament {
         }
         System.out.println("(P: Played, W: Wins, D: Draws, L: Losses, Pts: Points, GD: Goal Difference)");
 
-        // ===== 5. CHAMPION ANNOUNCEMENT =====
+        
         int champion = 0;
         for (int t = 1; t < teamCount; t++) {
             if (points[t] > points[champion]
@@ -115,7 +113,7 @@ public class Tournament {
             }
         }
 
-        // Puan ve averaj hâlâ eşitse bunu belirt
+        
         boolean stillTied = false;
         for (int t = 0; t < teamCount; t++) {
             if (t != champion && points[t] == points[champion]
@@ -135,7 +133,7 @@ public class Tournament {
         input.close();
     }
 
-    // Negatif olmayan gol sayısı okur
+    
     private static int readGoals(Scanner input, String message) {
         int value;
         while (true) {
